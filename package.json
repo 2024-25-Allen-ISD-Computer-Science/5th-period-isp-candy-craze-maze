@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "parcel": "^2.11.0"
+  },
+  "name": "parcel-and-angular-boilerplate",
+  "version": "1.0.0",
+  "description": "boilerplate for angular apps using parcel",
+  "source": "src/index.html",
+  "repository": "https://github.com/stylo-codes-stuff/parcel-and-angular-boilerplate",
+  "author": "Stylo <136652260+stylo-codes-stuff@users.noreply.github.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "yarn parcel src/index.html"
+  },
+  "dependencies": {
+    "@angular/cli": "^17.0.10",
+    "@angular/common": "^17.0.9",
+    "@angular/core": "^17.0.9",
+    "ng": "^0.0.0"
+  }
+}
