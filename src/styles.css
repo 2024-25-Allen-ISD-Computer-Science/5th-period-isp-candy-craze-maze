@@ -1,0 +1,33 @@
+body{
+
+}
+.title-text {
+    font-size: 80px; 
+    color:purple; 
+    text-align:center;
+    margin-top: 20px;
+}
+.goal-text{
+    font-size: 30px;
+    color: black;
+    text-align:left;
+    margin: 50;
+}
+.howtoplay-text{
+    font-size: 30px;
+    color: black;
+    text-align:left;
+    margin: 50;
+}
+.game-container{
+    width: 900px;
+    height: 700px;
+    background-color: grey;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+ 
+}
