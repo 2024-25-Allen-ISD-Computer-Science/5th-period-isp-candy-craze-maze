@@ -19,16 +19,35 @@ body{
     text-align:center;
     margin: 50;
 }
-.game-container{
-    width: 800px;
-    height: 500px;
-    background-color: #fca1ed;
-    border: 2px solid black;
-    display: flex;
+
+#game {
+    display: grid;
+    grid-template-columns: repeat(11, 30px);
+    grid-template-rows: repeat(9, 30px);
+    gap: 2px;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 0 auto;
- 
+    padding: 20px;
+    background-color: #433878;
+    border: 2px solid #000;
 }
 
+.wall {
+    background-color: #E4B1F0;
+    width: 30px;
+    height: 30px;
+    box-shadow: inset -1px -1px 1px #000, inset 1px 1px 1px #555;
+}
+
+.path {
+    background-color: #433878;
+    width: 30px;
+    height: 30px;
+}
+
+.collectible {
+    background-color: #FFE1FF;
+    width: 10px;
+    height: 10px;
+    margin: auto;
+    border-radius: 50%;
+}
