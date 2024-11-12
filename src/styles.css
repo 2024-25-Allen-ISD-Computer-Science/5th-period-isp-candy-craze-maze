@@ -51,10 +51,14 @@ body{
     margin: auto;
     border-radius: 50%;
 }
-.cake-charcter {
-    width: 100%;
-    height: 100%;
-    background-color: papayawhip;
-    border-radius: 50%;
+
+.cake{
+    width: 1630px;
+    height: 500px;
+    background: url(./cakee.png);
+    position: absolute;
+    left: 500px;
+    top: 200px;
+    transition: 0.1s ease;
  }
  

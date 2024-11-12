@@ -21,29 +21,32 @@ function createMaze() {
 
 createMaze();
 //Ths is placing the character on the grid
-let cakeCharcaterPosition= {x: 0, y: 0};
-function placecakeCharacter() {
-   const index = cakeCharacterPosition.y * gridSize + cakeCharacterPosition.x;
-   cells[index].classList.add("cakeCharacter");
+
+let cakePosition= {x: 5, y: 5};
+function placecake() {
+   const index = cakePosition.y * gridSize + cakePosition.x;
+   cells[index].classList.add("cake");
 }
 
 
 document.addEventListener(keydown, (event) => {
-   switch (event.key) {
-       case "w":
-           if (cakecharacterPosition.y > 0) cakecharacterPosition.y -= 1;
+   const speed = 10;
+
+    switch (event.key) {
+       case "ArrowUp":
+           if (cakePosition.y > 0) cakePosition.y -= 1;
            break;
-       case "s":
-           if (cakecharacterPosition.y < gridSize -1) cakecharacterPosition.y += 1;
+       case "ArrowDown":
+           if (cakePosition.y < gridSize -1) cakePosition.y += 1;
            break;
-       case "a":
-           if (cakecharacterPosition.x > 0) cakecharacterPosition.x -= 1;
+       case "ArrowLeft":
+           if (cakePosition.x > 0) cakePosition.x -= 1;
            break;
-       case "d":
-           if (cakecharacterPosition.x < gridSize - 1) cakecharacterPosition.x -= 1;
+       case "ArrowRight":
+           if (cakePosition.x < gridSize - 1) cakePosition.x -= 1;
            break;
    }
-   placecakeCharcater();
+   updatePosition();
       
    }
-});
+)
