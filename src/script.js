@@ -22,28 +22,29 @@ function createMaze() {
 createMaze();
 //Ths is placing the character on the grid
 
-let cakePosition= {x: 5, y: 5};
-function placecake() {
-   const index = cakePosition.y * gridSize + cakePosition.x;
-   cells[index].classList.add("cake");
+var spritobject = 
+{
+    x:0,
+    y:0,
+    width: 64,
+    height: 64
 }
-
 
 document.addEventListener(keydown, (event) => {
    const speed = 10;
 
     switch (event.key) {
        case "ArrowUp":
-           if (cakePosition.y > 0) cakePosition.y -= 1;
+           if (cakePosition.y > 0) cakePosition.y += 1;
            break;
        case "ArrowDown":
-           if (cakePosition.y < gridSize -1) cakePosition.y += 1;
+           if (cakePosition.y > 0) cakePosition.y -= 1;
            break;
        case "ArrowLeft":
            if (cakePosition.x > 0) cakePosition.x -= 1;
            break;
        case "ArrowRight":
-           if (cakePosition.x < gridSize - 1) cakePosition.x -= 1;
+           if (cakePosition.x < gridSize - 1) cakePosition.x += 1;
            break;
    }
    updatePosition();

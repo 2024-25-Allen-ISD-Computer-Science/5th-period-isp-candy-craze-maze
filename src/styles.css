@@ -53,12 +53,12 @@ body{
 }
 
 .cake{
-    width: 1630px;
-    height: 500px;
-    background: url(./cakee.png);
+    width: 47px;
+    height: 40px;
+    background: url(./cake-pic.png);
     position: absolute;
-    left: 500px;
-    top: 200px;
+    left: 550px;
+    top: 550px;
     transition: 0.1s ease;
  }
  
