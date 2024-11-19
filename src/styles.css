@@ -22,8 +22,8 @@ body{
 
 #game {
     display: grid;
-    grid-template-columns: repeat(10, 30px);
-    grid-template-rows: repeat(9, 30px);
+    grid-template-columns: repeat(15, 30px);
+    grid-template-rows: repeat(15, 30px);
     justify-content: center;
     padding: 20px;
     background-color: #433878;
@@ -38,8 +38,8 @@ body{
 
 .path {
     background-color: #433878;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
 }
 
 .collectible {
@@ -49,6 +49,15 @@ body{
     margin: auto;
     border-radius: 50%;
 }
+
+.power-pellet {
+    background-color: #ffffff;
+    width: 15px;
+    height: 15px;
+    margin: auto;
+    border-radius: 50%;
+}
+
 .cake{
     width: 47px;
     height: 40px;
