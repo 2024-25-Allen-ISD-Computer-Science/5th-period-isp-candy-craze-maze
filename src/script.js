@@ -1,4 +1,4 @@
-
+console.log("Script is working!");
 const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 0, 0, 0, 0, 3, 1, 1, 1, 3, 0, 0, 0, 0, 1,
@@ -27,7 +27,60 @@ function createMaze() {
 
 createMaze();
 
-var canvas = document.querySelector("canvas");
+const sprite = document.getElementById("sprite");
+const upButton = document.getElementById("up");
+const downButton = document.getElementById("down");
+const leftButton = document.getElementById("left");
+const rightButton = document.getElementById("right");
+
+
+let x = 200;
+let y = 200; 
+
+const step = 10;
+
+function moveSprite(dx, dy) {
+    x += dx;
+    y += dy;
+
+    
+    const container = document.getElementById("game-container");
+    const maxX = container.offsetWidth - sprite.offsetWidth;
+    const maxY = container.offsetHeight - sprite.offsetHeight;
+//container or sprite might be null
+
+    x = Math.max(0, Math.min(maxX, x));
+    y = Math.max(0, Math.min(maxY, y));
+
+    sprite.style.position = "absolute";
+    sprite.style.left = `${x}px`;
+    sprite.style.top = `${y}px`;
+}
+
+
+document.addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case "ArrowUp":
+            moveSprite(0, -step);
+            break;
+        case "ArrowDown":
+            moveSprite(0, step);
+            break;
+        case "ArrowLeft":
+            moveSprite(-step, 0);
+            break;
+        case "ArrowRight":
+            moveSprite(step, 0);
+            break;
+    }
+});
+
+document.getElementById("up").addEventListener("click", () => moveSprite(0, -step));
+document.getElementById("down").addEventListener("click", () => moveSprite(0, step));
+document.getElementById("left").addEventListener("click", () => moveSprite(-step, 0));
+document.getElementById("right").addEventListener("click", () => moveSprite(step, 0));
+
+/*var canvas = document.querySelector("canvas");
 var drawingSurface = canvas.getContext("2d");
 var spritobject =
 {
@@ -131,4 +184,4 @@ function update()
 
 image.addEventListener("load", function() {
     update();
-}, false);
+}, false); */

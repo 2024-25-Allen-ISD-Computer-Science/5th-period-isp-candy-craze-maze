@@ -1,5 +1,6 @@
 body{
-    background-color:#EFE1E1
+    background-color:#EFE1E1;
+
 }
 .title-text {
     font-size: 80px; 
@@ -58,7 +59,7 @@ body{
     border-radius: 50%;
 }
 
-.cake{
+/* .cake{
     width: 47px;
     height: 40px;
     background: url(./cake-pic.png);
@@ -66,5 +67,34 @@ body{
     left: 550px;
     top: 550px;
     transition: 0.1s ease;
- }
- 
+ } */
+
+ #box-for-cake {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border: 2px solid black;
+    overflow: hidden;
+}
+
+#sprite {
+    position: absolute;
+    top: 50;
+    left: 50;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+}
+
+#controls {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+button {
+    font-size: 20px;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
