@@ -23,8 +23,8 @@ body{
 
 #game {
     display: grid;
-    grid-template-columns: repeat(15, 30px);
-    grid-template-rows: repeat(15, 30px);
+    grid-template-columns: repeat(30, 40px);
+    grid-template-rows: repeat(30, 40px);
     justify-content: center;
     padding: 20px;
     background-color: #433878;
@@ -33,14 +33,14 @@ body{
 
 .wall {
     background-color: #E4B1F0;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
 }
 
 .path {
     background-color: #433878;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 
 .collectible {
@@ -62,7 +62,7 @@ body{
  #game-container {
     position: relative;
     left: 555;
-    top: -475px;
+    top: -900px;
     width: 450px;
     height: 450px;
     border: 2px solid black;
@@ -73,7 +73,7 @@ body{
     position: absolute;
     top:230;
     left:0;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 40px;
 }
 
