@@ -61,17 +61,17 @@ body{
 
  #game-container {
     position: relative;
-    left: 555;
-    top: -900px;
-    width: 450px;
-    height: 450px;
+    left: 664;
+    top: -1225px;
+    width: 1200px;
+    height: 640px;
     border: 2px solid black;
     overflow: hidden;
 }
 
 #sprite {
     position: absolute;
-    top:230;
+    bottom:0;
     left:0;
     width: 45px;
     height: 40px;
