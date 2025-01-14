@@ -82,5 +82,28 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+let timeLeft = 60; 
+function startTimer() {
+    const timerElement = document.getElementById("timer");
+    const timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--; 
+            timerElement.textContent = `Time Left: ${timeLeft}`;
+        } else {
+            clearInterval(timerInterval); 
+            gameOver(); 
+        }
+    }, 1000); 
+}
+function gameOver() {
+    alert("Time's up! Game Over!");
+    
+}
+startTimer();
 
+let isPaused = false;
+function togglePause() {
+    isPaused = !isPaused;
+}
+document.getElementById("pause-button").addEventListener("click", togglePause);
 

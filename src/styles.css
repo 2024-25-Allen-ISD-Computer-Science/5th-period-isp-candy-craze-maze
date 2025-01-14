@@ -77,3 +77,23 @@ body{
     height: 37px;
 }
 
+#timer {
+    font-size: 24px;
+    color: #ff8b9e;
+    text-align: center;
+    margin-bottom: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.timer-box {
+    font-size: 24px;                  
+    color: #ffffff;                   
+    text-align: center;              
+    background-color: #333333;        
+    border: 2px solid #ae00ff;       
+    border-radius: 10px;             
+    padding: 10px 20px;              
+    display: inline-block;           
+    font-family: 'Press Start 2P', sans-serif; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
