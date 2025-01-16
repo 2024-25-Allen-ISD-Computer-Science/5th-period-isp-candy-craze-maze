@@ -1,24 +1,29 @@
 <!doctype html>
 <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Candy Craze Maze!!!!</title>
-   <link rel="stylesheet" href="styles.css">
- </head>
- <body>
-   <h1 class="title-text"> CANDY CRAZE MAZE</h1>
-   <h2 class = "goal-text">Goal: Try to run away from kids while also getting all the cupcakes, you have three lives... </h2>
-   <h2 class = "howtoplay-text"> How to play: Use the arrow keys to move around in the maze and special cupakes let you speed up! </h2>
-      <div id = "game"></div>
-     <div class= "cake"></div>
-    
-    <div id="game-container">
-      <img id="sprite" src="cake-pic.png" alt="Moving Sprite">
-    </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candy Craze Maze!!!!</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1 class="title-text">CANDY CRAZE MAZE</h1>
+  <h2 class="goal-text">Goal: Try to run away from kids while also getting all the cupcakes, you have three lives...</h2>
+  <h2 class="howtoplay-text">How to play: Use the arrow keys to move around in the maze and special cupcakes let you speed up!</h2>
 
-    <div id = "timer" class ="timer-box" > Time Left : 60 </div>
+  <div id="game-container">
+    <div id="game">
+    </div>
+    <img id="sprite" src="cake-pic.png" alt="Moving Sprite">
+  </div>
+
+  <div class="timer-container">
+    <div class="timer-box">
+      <span id="timer">00:00</span>
+    </div>
+  </div>
 
   <script src="script.js"></script>
- </body>
+</body>
 </html>
+

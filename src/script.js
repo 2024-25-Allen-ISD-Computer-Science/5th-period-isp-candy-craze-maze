@@ -101,9 +101,3 @@ function gameOver() {
 }
 startTimer();
 
-let isPaused = false;
-function togglePause() {
-    isPaused = !isPaused;
-}
-document.getElementById("pause-button").addEventListener("click", togglePause);
-
