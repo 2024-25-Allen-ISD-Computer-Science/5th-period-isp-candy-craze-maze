@@ -20,8 +20,9 @@ const layout = [
 
 const gameContainer = document.getElementById("game");
 function createMaze() {
-    layout.forEach(cell => {
+    layout.forEach((cell,index) => {
         const div = document.createElement("div");
+        div.id = `cell-${index}`;
         div.classList.add(cell === 1 ? "wall" : cell === 2 ? "collectible" : cell === 3 ? "power-pellet" : "path");
         gameContainer.appendChild(div);
     });
@@ -39,24 +40,50 @@ const rightButton = document.getElementById("right");
 let x = 0;
 let y = 600; 
 
-const step = 10;
+const step = 40;
 
 function moveSprite(dx, dy) {
-    x += dx;
-    y += dy;
 
-    
-    const container = document.getElementById("game-container");
-    const maxX = container.offsetWidth - sprite.offsetWidth;
-    const maxY = container.offsetHeight - sprite.offsetHeight;
+    const currentColumn = Math.floor(x / 40);
+    const currentRow = Math.floor(y / 40);
 
-    x = Math.max(0, Math.min(maxX, x));
-    y = Math.max(0, Math.min(maxY, y));
+    const targetColumn = currentColumn + dx / 40;
+    const targetRow = currentRow + dy / 40;
 
-    sprite.style.position = "absolute";
-    sprite.style.left = `${x}px`;
-    sprite.style.top = `${y}px`;
+    const targetIndex = (targetRow * 30) + targetColumn;
+
+    if (
+        targetColumn >= 0 &&
+        targetColumn < 30 &&
+        targetRow >= 0 &&
+        targetRow < layout.length / 30 &&
+        layout[targetIndex] !== (1)
+    ) {
+        x += dx;
+        y += dy;
+        
+        if (layout[targetIndex] === 3) {
+            layout[targetIndex] = 0;
+            const targetCell = document.getElementById(`cell-${targetIndex}`);
+            targetCell.classList.remove("power-pellet");
+            targetCell.classList.add("path");
+        } 
+
+        const container = document.getElementById("game-container");
+        const maxX = container.offsetWidth - sprite.offsetWidth;
+        const maxY = container.offsetHeight - sprite.offsetHeight;
+
+        x = Math.max(0, Math.min(maxX, x));
+        y = Math.max(0, Math.min(maxY, y));
+
+        sprite.style.position = "absolute";
+        sprite.style.left = `${x}px`;
+        sprite.style.top = `${y}px`;
+    }else {
+        console.log("Blocked by wall or out of bounds");
+    }
 }
+
 
 
 document.addEventListener("keydown", (event) => {
@@ -81,6 +108,7 @@ document.addEventListener("keydown", (event) => {
             break;
     }
 });
+
 
 let timeLeft = 60; 
 function startTimer() {
