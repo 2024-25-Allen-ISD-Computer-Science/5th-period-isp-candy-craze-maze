@@ -99,4 +99,24 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
+  .controls {
+    text-align: center;
+    margin: 20px 0;
+  }
   
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #433878;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #5a4a99;
+  }
+  
+

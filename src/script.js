@@ -111,21 +111,39 @@ document.addEventListener("keydown", (event) => {
 
 
 let timeLeft = 60; 
+let timerInterval; 
+let isGameRunning = false; 
+
+document.getElementById("start-button").addEventListener("click", () => {
+  if (!isGameRunning) {
+    isGameRunning = true; 
+    startTimer(); 
+    console.log("Game started!"); 
+  }
+});
+
+document.getElementById("stop-button").addEventListener("click", () => {
+  if (isGameRunning) {
+    isGameRunning = false; 
+    stopTimer(); 
+    console.log("Game stopped!"); 
+  }
+});
+
 function startTimer() {
-    const timerElement = document.getElementById("timer");
-    const timerInterval = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--; 
-            timerElement.textContent = `Time Left: ${timeLeft}`;
-        } else {
-            clearInterval(timerInterval); 
-            gameOver(); 
-        }
-    }, 1000); 
+  const timerElement = document.getElementById("timer");
+  timerInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--; 
+      timerElement.textContent = `Time Left: ${timeLeft}`; 
+    } else {
+      stopTimer(); 
+      alert("Time's up! Game Over!");
+    }
+  }, 1000); 
 }
-function gameOver() {
-    alert("Time's up! Game Over!");
-    
+
+function stopTimer() {
+  clearInterval(timerInterval); 
 }
-startTimer();
 
