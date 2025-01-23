@@ -1,4 +1,4 @@
-/* General body styling */
+
 body {
     background-color: #EFE1E1;
     font-family: 'Courier New', Courier, monospace;
@@ -8,7 +8,6 @@ body {
     margin: 0;
   }
   
-  /* Title and instruction styles */
   .title-text {
     font-size: 80px;
     color: #ff8b9e;
@@ -119,4 +118,18 @@ body {
     background-color: #5a4a99;
   }
   
+  .score-box 
+  {
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #333333;
+    border: 2px solid #ae00ff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: inline-block;
+    font-family: sans-serif;
+  }
+
+    
 

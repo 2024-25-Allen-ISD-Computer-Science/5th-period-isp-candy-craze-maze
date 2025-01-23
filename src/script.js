@@ -39,6 +39,7 @@ const rightButton = document.getElementById("right");
 
 let x = 0;
 let y = 600; 
+let score = 0;
 
 const step = 40;
 
@@ -62,12 +63,18 @@ function moveSprite(dx, dy) {
         x += dx;
         y += dy;
         
-        if (layout[targetIndex] === 3) {
+        if (layout[targetIndex] === 2 || layout[targetIndex] === 3 ) {
             layout[targetIndex] = 0;
             const targetCell = document.getElementById(`cell-${targetIndex}`);
+           
             targetCell.classList.remove("power-pellet");
             targetCell.classList.add("path");
-        } 
+           
+            score += 1;
+
+            const scoreboard = document.getElementById("scoreboard");
+            scoreboard.innerText = `Score: ${score}`;
+        }
 
         const container = document.getElementById("game-container");
         const maxX = container.offsetWidth - sprite.offsetWidth;
