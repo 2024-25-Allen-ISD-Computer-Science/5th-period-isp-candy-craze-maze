@@ -1,6 +1,6 @@
 const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0,
     1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1,
     1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1,
     1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
@@ -68,6 +68,7 @@ function moveSprite(dx, dy) {
             const targetCell = document.getElementById(`cell-${targetIndex}`);
            
             targetCell.classList.remove("power-pellet");
+            targetCell.classList.remove("collectible");
             targetCell.classList.add("path");
            
             score += 1;
@@ -154,3 +155,36 @@ function stopTimer() {
   clearInterval(timerInterval); 
 }
 
+const cake = document.getElementById("sprite");
+const greenJello = document.getElementById("green-position");
+const redJello = document.getElementById("red-position");
+
+function moveJello(jello) {
+    const cakeRect = cake.getBoundingClientRect();
+    const jelloRect = jello.getBoundingClientRect();
+
+    let cakeX = cake.offsetLeft;
+    let cakeY = cake.offsetTop;
+    let jelloX = jello.offsetLeft;
+    let jelloY = jello.offsetTop;
+
+    let speed = 2;
+
+  
+    if (jelloX < cakeX) {
+        jello.style.left = (jelloX + speed) + "px";
+    } else if (jelloX > cakeX) {
+        jello.style.left = (jelloX - speed) + "px";
+    }
+
+    if (jelloY < cakeY) {
+        jello.style.top = (jelloY + speed) + "px";
+    } else if (jelloY > cakeY) {
+        jello.style.top = (jelloY - speed) + "px";
+    }
+}
+
+setInterval(() => {
+  moveJello(greenJello);
+  moveJello(redJello);
+}, 100);

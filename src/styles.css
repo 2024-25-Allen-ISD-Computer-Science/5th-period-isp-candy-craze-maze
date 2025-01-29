@@ -78,6 +78,22 @@ body {
     height: 37px;
     z-index: 10;
   }
+  #green-position {
+    position: absolute;
+    bottom: 560;
+    left: 1160;
+    width: 37px;
+    height: 37px;
+    z-index: 10;
+  }
+  #red-position {
+    position: absolute;
+    bottom: 562;
+    left: 0;
+    width: 37px;
+    height: 37px;
+    z-index: 10;
+  }
   
   .timer-container {
     display: flex;
