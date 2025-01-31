@@ -122,14 +122,10 @@ let timeLeft = 60;
 let timerInterval; 
 let isGameRunning = false; 
 
-document.getElementById("start-button").addEventListener("click", () => {
-  if (!isGameRunning) {
-    isGameRunning = true; 
-    startTimer(); 
-    console.log("Game started!"); 
-  }
-});
+// Start timer when player first moves
+document.addEventListener("keydown", startGameOnMove);
 
+// Stop button functionality remains the same
 document.getElementById("stop-button").addEventListener("click", () => {
   if (isGameRunning) {
     isGameRunning = false; 
@@ -137,6 +133,17 @@ document.getElementById("stop-button").addEventListener("click", () => {
     console.log("Game stopped!"); 
   }
 });
+
+function startGameOnMove() {
+  if (!isGameRunning) {
+    isGameRunning = true; 
+    startTimer(); 
+    console.log("Game started!");
+    
+    // Remove the event listener so it doesn't restart the timer multiple times
+    document.removeEventListener("keydown", startGameOnMove);
+  }
+}
 
 function startTimer() {
   const timerElement = document.getElementById("timer");
@@ -154,6 +161,7 @@ function startTimer() {
 function stopTimer() {
   clearInterval(timerInterval); 
 }
+
 
 
 const cake = document.getElementById("sprite");
