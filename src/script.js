@@ -155,36 +155,61 @@ function stopTimer() {
   clearInterval(timerInterval); 
 }
 
+
 const cake = document.getElementById("sprite");
 const greenJello = document.getElementById("green-position");
 const redJello = document.getElementById("red-position");
 
-function moveJello(jello) {
-    const cakeRect = cake.getBoundingClientRect();
-    const jelloRect = jello.getBoundingClientRect();
+let jelloX = 560; 
+let jelloY = 1160; 
 
-    let cakeX = cake.offsetLeft;
-    let cakeY = cake.offsetTop;
-    let jelloX = jello.offsetLeft;
-    let jelloY = jello.offsetTop;
+function isWall(x, y) {
 
-    let speed = 2;
-
-  
-    if (jelloX < cakeX) {
-        jello.style.left = (jelloX + speed) + "px";
-    } else if (jelloX > cakeX) {
-        jello.style.left = (jelloX - speed) + "px";
-    }
-
-    if (jelloY < cakeY) {
-        jello.style.top = (jelloY + speed) + "px";
-    } else if (jelloY > cakeY) {
-        jello.style.top = (jelloY - speed) + "px";
-    }
+  const col = Math.floor(x / 40);
+  const row = Math.floor(y / 40);
+  const index = row * 30 + col; 
+  return layout[index] === 1;
 }
 
-setInterval(() => {
-  moveJello(greenJello);
-  moveJello(redJello);
-}, 100);
+function moveJello() {
+  const cakeX = parseInt(cake.style.left || 0, 10);
+  const cakeY = parseInt(cake.style.top || 0, 10);
+
+  const cakeColumn = Math.floor(cakeX / step); 
+  const cakeRow = Math.floor(cakeY / step); 
+
+  const jelloColumn = Math.floor(jelloX / step); 
+  const jelloRow = Math.floor(jelloY / step);
+
+  let dx = 0;
+  let dy = 0;
+
+  if (cakeColumn < jelloColumn) {
+      dx = -step; 
+  } else if (cakeColumn > jelloColumn) {
+      dx = step;
+  }
+
+  if (cakeRow < jelloRow) {
+      dy = -step; 
+  } else if (cakeRow > jelloRow) {
+      dy = step;
+  }
+
+  const newJelloX = jelloX + dx;
+  const newJelloY = jelloY + dy;
+
+  if (!isWall(newJelloX, newJelloY)) {
+      jelloX = newJelloX;
+      jelloY = newJelloY;
+
+      greenJello.style.position = "absolute";
+      greenJello.style.left = `${jelloX}px`;
+      greenJello.style.top = `${jelloY}px`;
+  }
+}
+
+function startJelloMovement() {
+  setInterval(moveJello, 300);
+}
+startJelloMovement();
