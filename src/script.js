@@ -1,6 +1,6 @@
 const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 1,
     1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1,
     1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1,
     1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
@@ -13,7 +13,7 @@ const layout = [
     1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1,
     1, 0, 0, 0, 0, 0, 3, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 1, 0, 0, 0, 0, 1,
     1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 ];
 
@@ -63,11 +63,10 @@ function moveSprite(dx, dy) {
         x += dx;
         y += dy;
         
-        if (layout[targetIndex] === 2 || layout[targetIndex] === 3 ) {
+        if (layout[targetIndex] === 2) {
             layout[targetIndex] = 0;
             const targetCell = document.getElementById(`cell-${targetIndex}`);
            
-            targetCell.classList.remove("power-pellet");
             targetCell.classList.remove("collectible");
             targetCell.classList.add("path");
            
@@ -76,6 +75,19 @@ function moveSprite(dx, dy) {
             const scoreboard = document.getElementById("scoreboard");
             scoreboard.innerText = `Score: ${score}`;
         }
+        if(layout[targetIndex] === 3) {
+          layout[targetIndex] = 0;
+          const targetCell = document.getElementById(`cell-${targetIndex}`);
+         
+          targetCell.classList.remove("power-pellet");
+          targetCell.classList.add("path");
+         
+          score += 2;
+
+          const scoreboard = document.getElementById("scoreboard");
+          scoreboard.innerText = `Score: ${score}`;
+      }
+
 
         const container = document.getElementById("game-container");
         const maxX = container.offsetWidth - sprite.offsetWidth;
@@ -168,8 +180,8 @@ const cake = document.getElementById("sprite");
 const greenJello = document.getElementById("green-position");
 const redJello = document.getElementById("red-position");
 
-let jelloX = 560; 
-let jelloY = 1160; 
+let jelloX = 1160; 
+let jelloY = 600; 
 
 function isWall(x, y) {
 
