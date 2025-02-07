@@ -68,11 +68,12 @@ body {
     height: 10px;
   }
   
-  .power-pellet {
-    background-color: #ffffff;
-    width: 15px;
-    height: 15px;
+ .power-pellet {
+    background-color: #d28eff;
+    width: 20px;
+    height: 20px;
   }
+
   
   #sprite {
     position: absolute;

@@ -1,20 +1,20 @@
 const layout = [
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 1,
-    1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1,
-    1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1,
-    1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
-    1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 1, 0, 1, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
-    1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,
-    1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1,
-    1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1,
-    1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1,
-    1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 3, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 1, 0, 0, 0, 0, 1,
-    1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 2, 2, 2, 2, 2, 3, 2, 2, 2, 1, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 2, 2, 2, 2, 2,
+  1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1,
+  1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 2, 2, 1, 2, 2, 3, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 1,
+  1, 2, 1, 2, 1, 2, 3, 2, 2, 2, 1, 3, 2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1,
+  1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 3, 2, 2, 1, 2, 2, 3, 2, 2, 2, 1,
+  1, 2, 1, 3, 1, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 1, 2, 1,
+  1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 3, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1,
+  1, 2, 2, 2, 1, 2, 1, 2, 2, 2, 3, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 3, 1, 2, 1, 2, 2, 1, 2, 1,
+  1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 3, 2, 2, 2, 1, 2, 1, 1, 1, 1, 2, 1,
+  1, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 2, 3, 2, 2, 1,
+  1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 3, 1, 2, 2, 2, 2, 3, 2, 1, 1, 1, 2, 1, 1, 1, 1,
+  1, 2, 2, 2, 2, 2, 3, 2, 1, 2, 1, 2, 2, 2, 2, 3, 2, 2, 1, 2, 1, 2, 2, 2, 1, 2, 2, 3, 2, 1,
+  1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1,
+  1, 2, 2, 2, 2, 3, 2, 2, 1, 2, 2, 2, 2, 3, 2, 2, 3, 2, 2, 2, 1, 2, 2, 2, 2, 2, 3, 2, 2, 1,
+  0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 ];
 
 
@@ -133,16 +133,31 @@ document.addEventListener("keydown", (event) => {
 let timeLeft = 60; 
 let timerInterval; 
 let isGameRunning = false; 
+let isPaused = false; 
 
-// Start timer when player first moves
 document.addEventListener("keydown", startGameOnMove);
 
-// Stop button functionality remains the same
 document.getElementById("stop-button").addEventListener("click", () => {
   if (isGameRunning) {
     isGameRunning = false; 
     stopTimer(); 
     console.log("Game stopped!"); 
+  }
+});
+
+document.getElementById("pause-button").addEventListener("click", () => {
+  if (isGameRunning && !isPaused) {
+    isPaused = true;
+    clearInterval(timerInterval);
+    console.log("Game paused!");
+  }
+});
+
+document.getElementById("unpause-button").addEventListener("click", () => {
+  if (isGameRunning && isPaused) {
+    isPaused = false;
+    startTimer();
+    console.log("Game resumed!");
   }
 });
 
@@ -152,18 +167,20 @@ function startGameOnMove() {
     startTimer(); 
     console.log("Game started!");
     
-    // Remove the event listener so it doesn't restart the timer multiple times
     document.removeEventListener("keydown", startGameOnMove);
   }
 }
 
 function startTimer() {
   const timerElement = document.getElementById("timer");
+
+  clearInterval(timerInterval);
+
   timerInterval = setInterval(() => {
-    if (timeLeft > 0) {
+    if (!isPaused && timeLeft > 0) {
       timeLeft--; 
       timerElement.textContent = `Time Left: ${timeLeft}`; 
-    } else {
+    } else if (timeLeft === 0) {
       stopTimer(); 
       alert("Time's up! Game Over!");
     }
