@@ -1,6 +1,6 @@
 const layout = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2,
+  0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2,
   1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1,
   1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 1,
   1, 2, 1, 2, 1, 2, 3, 2, 2, 2, 1, 3, 2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1,
@@ -13,7 +13,7 @@ const layout = [
   1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1,
   1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 1, 2, 2, 3, 2, 1,
   1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1,
-  1, 2, 2, 2, 2, 3, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+  1, 2, 2, 2, 2, 3, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0,
   0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 ];
 
@@ -257,3 +257,78 @@ function startJelloMovement() {
   setInterval(moveJello, 300);
 }
 startJelloMovement();
+
+class Node {
+  constructor(x, y, parent = null) {
+      this.x = x;
+      this.y = y;
+      this.g = 0; 
+      this.h = 0; 
+      this.f = 0;
+      this.parent = parent;
+  }
+}
+
+function heuristic(a, b) {
+  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+}
+
+function aStar(startX, startY, targetX, targetY) {
+  const openList = [];
+  const closedList = [];
+  const startNode = new Node(startX, startY);
+  const targetNode = new Node(targetX, targetY);
+
+  openList.push(startNode);
+
+  while (openList.length > 0) {
+      let currentNode = openList.reduce((prev, curr) => (prev.f < curr.f ? prev : curr));
+
+      if (currentNode.x === targetNode.x && currentNode.y === targetNode.y) {
+          let path = [];
+          let temp = currentNode;
+          while (temp !== null) {
+              path.push([temp.x, temp.y]);
+              temp = temp.parent;
+          }
+          return path.reverse();
+      }
+
+      openList.splice(openList.indexOf(currentNode), 1);
+      closedList.push(currentNode);
+
+      const neighbors = [
+          { x: 0, y: -1 }, 
+          { x: 0, y: 1 }, 
+          { x: -1, y: 0 },
+          { x: 1, y: 0 } 
+      ];
+
+      for (let neighbor of neighbors) {
+          const nx = currentNode.x + neighbor.x;
+          const ny = currentNode.y + neighbor.y;
+
+          
+          if (nx < 0 || nx >= 30 || ny < 0 || ny >= layout.length / 30 || layout[nx + ny * 30] === 1) {
+              continue;
+          }
+
+          const neighborNode = new Node(nx, ny, currentNode);
+          if (closedList.some(node => node.x === neighborNode.x && node.y === neighborNode.y)) {
+              continue;
+          }
+
+
+          neighborNode.g = currentNode.g + 1;
+          neighborNode.h = heuristic(neighborNode, targetNode);
+          neighborNode.f = neighborNode.g + neighborNode.h;
+
+         
+          if (!openList.some(node => node.x === neighborNode.x && node.y === neighborNode.y) || neighborNode.f < openList.find(node => node.x === neighborNode.x && node.y === neighborNode.y).f) {
+              openList.push(neighborNode);
+          }
+      }
+  }
+
+  return [];
+}
