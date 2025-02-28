@@ -199,136 +199,95 @@ function stopTimer() {
 }
 
 
-
 const cake = document.getElementById("sprite");
 const greenJello = document.getElementById("green-position");
 const redJello = document.getElementById("red-position");
+let greenJelloPosition = {col: 29, row: 0};
+const gridSize = 40;
 
-let jelloX = 1160; 
-let jelloY = 600; 
 
-function isWall(x, y) {
-
-  const col = Math.floor(x / 40);
-  const row = Math.floor(y / 40);
-  const index = row * 30 + col; 
-  return layout[index] === 1;
+function getGridPosition(x, y) {
+    return { col: Math.floor(x / 40), row: Math.floor(y / 40) };
 }
 
-function moveJello() {
-  const cakeX = parseInt(cake.style.left || 0, 10);
-  const cakeY = parseInt(cake.style.top || 0, 10);
 
-  const cakeColumn = Math.floor(cakeX / step); 
-  const cakeRow = Math.floor(cakeY / step); 
-
-  const jelloColumn = Math.floor(jelloX / step); 
-  const jelloRow = Math.floor(jelloY / step);
-
-  let dx = 0;
-  let dy = 0;
-
-  if (cakeColumn < jelloColumn) {
-      dx = -step; 
-  } else if (cakeColumn > jelloColumn) {
-      dx = step;
-  }
-
-  if (cakeRow < jelloRow) {
-      dy = -step; 
-  } else if (cakeRow > jelloRow) {
-      dy = step;
-  }
-
-  const newJelloX = jelloX + dx;
-  const newJelloY = jelloY + dy;
-
-  if (!isWall(newJelloX, newJelloY)) {
-      jelloX = newJelloX;
-      jelloY = newJelloY;
-
-      greenJello.style.position = "absolute";
-      greenJello.style.left = `${jelloX}px`;
-      greenJello.style.top = `${jelloY}px`;
-  }
+function getPixelPosition(col, row) {
+    return { x: col * 40, y: row * 40 };
 }
 
-function startJelloMovement() {
-  setInterval(moveJello, 300);
+
+function findPathBFS(startCol, startRow, targetCol, targetRow, grid) {
+    const rows = grid.length / 30; 
+    const cols = 30; 
+
+    const visited = Array(rows).fill().map(() => Array(cols).fill(false));
+    const prev = Array(rows).fill().map(() => Array(cols).fill(null));
+
+    const queue = [];
+    queue.push({ col: startCol, row: startRow });
+    visited[startRow][startCol] = true;
+
+    const directions = [
+        { dc: 0, dr: -1 }, 
+        { dc: 0, dr: 1 },  
+        { dc: -1, dr: 0 }, 
+        { dc: 1, dr: 0 }  
+    ];
+
+    while (queue.length > 0) {
+        const { col, row } = queue.shift();
+
+        if (col === targetCol && row === targetRow) {
+            let path = [];
+            let current = { col, row };
+            while (prev[current.row][current.col] !== null) {
+                path.push(current);
+                current = prev[current.row][current.col];
+            }
+            path.reverse();
+            return path;
+        }
+
+        for (const { dc, dr } of directions) {
+            const newCol = col + dc;
+            const newRow = row + dr;
+
+            if (
+                newCol >= 0 && newCol < cols &&
+                newRow >= 0 && newRow < rows &&
+                !visited[newRow][newCol] &&
+                grid[newRow * cols + newCol] !== 1 
+            ) {
+                visited[newRow][newCol] = true;
+                prev[newRow][newCol] = { col, row };
+                queue.push({ col: newCol, row: newRow });
+            }
+        }
+    }
+    return []; 
 }
-startJelloMovement();
 
-class Node {
-  constructor(x, y, parent = null) {
-      this.x = x;
-      this.y = y;
-      this.g = 0; 
-      this.h = 0; 
-      this.f = 0;
-      this.parent = parent;
-  }
+
+function updateGreenJello() {
+    const cakePos = getGridPosition(x, y); 
+    const jelloPos = greenJelloPosition;
+
+    console.log(`Cake Position: ${cakePos.col}, ${cakePos.row}`);
+    console.log(`Green Jello Position: ${jelloPos.col}, ${jelloPos.row}`);
+
+    const path = findPathBFS(jelloPos.col, jelloPos.row, cakePos.col, cakePos.row, layout);
+
+    if (path.length > 1) {
+        const nextStep = path[1];
+        greenJelloPosition.col = nextStep.col;
+        greenJelloPosition.row = nextStep.row;
+
+        const pixelPos = getPixelPosition(nextStep.col, nextStep.row);
+        greenJello.style.left = `${pixelPos.x}px`;
+        greenJello.style.top = `${pixelPos.y}px`;
+    } else {
+        console.log("No valid path found for Green Jello!");
+    }
 }
 
-function heuristic(a, b) {
-  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
-}
-
-function aStar(startX, startY, targetX, targetY) {
-  const openList = [];
-  const closedList = [];
-  const startNode = new Node(startX, startY);
-  const targetNode = new Node(targetX, targetY);
-
-  openList.push(startNode);
-
-  while (openList.length > 0) {
-      let currentNode = openList.reduce((prev, curr) => (prev.f < curr.f ? prev : curr));
-
-      if (currentNode.x === targetNode.x && currentNode.y === targetNode.y) {
-          let path = [];
-          let temp = currentNode;
-          while (temp !== null) {
-              path.push([temp.x, temp.y]);
-              temp = temp.parent;
-          }
-          return path.reverse();
-      }
-
-      openList.splice(openList.indexOf(currentNode), 1);
-      closedList.push(currentNode);
-
-      const neighbors = [
-          { x: 0, y: -1 }, 
-          { x: 0, y: 1 }, 
-          { x: -1, y: 0 },
-          { x: 1, y: 0 } 
-      ];
-
-      for (let neighbor of neighbors) {
-          const nx = currentNode.x + neighbor.x;
-          const ny = currentNode.y + neighbor.y;
-
-          
-          if (nx < 0 || nx >= 30 || ny < 0 || ny >= layout.length / 30 || layout[nx + ny * 30] === 1) {
-              continue;
-          }
-
-          const neighborNode = new Node(nx, ny, currentNode);
-          if (closedList.some(node => node.x === neighborNode.x && node.y === neighborNode.y)) {
-              continue;
-          }
-
-
-          neighborNode.g = currentNode.g + 1;
-          neighborNode.h = heuristic(neighborNode, targetNode);
-          neighborNode.f = neighborNode.g + neighborNode.h;
-
-         
-          if (!openList.some(node => node.x === neighborNode.x && node.y === neighborNode.y) || neighborNode.f < openList.find(node => node.x === neighborNode.x && node.y === neighborNode.y).f) {
-              openList.push(neighborNode);
-          }
-      }
-  }
-
-  return [];
-}
+setInterval(updateGreenJello, 500);
