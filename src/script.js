@@ -203,8 +203,8 @@ const cake = document.getElementById("sprite");
 const greenJello = document.getElementById("green-position");
 const redJello = document.getElementById("red-position");
 let greenJelloPosition = {col: 29, row: 0};
+const redJelloPosition = { col: 0, row: 1 };
 const gridSize = 40;
-
 
 function getGridPosition(x, y) {
     return { col: Math.floor(x / 40), row: Math.floor(y / 40) };
@@ -272,9 +272,6 @@ function updateGreenJello() {
     const cakePos = getGridPosition(x, y); 
     const jelloPos = greenJelloPosition;
 
-    console.log(`Cake Position: ${cakePos.col}, ${cakePos.row}`);
-    console.log(`Green Jello Position: ${jelloPos.col}, ${jelloPos.row}`);
-
     const path = findPathBFS(jelloPos.col, jelloPos.row, cakePos.col, cakePos.row, layout);
 
     if (path.length > 1) {
@@ -291,3 +288,51 @@ function updateGreenJello() {
 }
 
 setInterval(updateGreenJello, 500);
+
+let redJelloSpeed = 1000; 
+const minSpeed = 200; 
+const maxSpeed = 300;
+const speedIncreaseRate = 5;
+const chaseThreshold = 30;
+let gameTimeElapsed = 0;
+let isRedJelloActive = false; 
+
+function updateRedJello() {
+  const cakePos = getGridPosition(x, y);
+  const jelloRedPos = redJelloPosition;
+
+  const path = findPathBFS(jelloRedPos.col, jelloRedPos.row, cakePos.col, cakePos.row, layout);
+
+  if (path.length > 2) {
+    const nextStep = path[2];
+    
+    redJelloPosition.col = nextStep.col;
+    redJelloPosition.row = nextStep.row;
+
+    const pixelPos = getPixelPosition(nextStep.col, nextStep.row);
+    redJello.style.left = `${pixelPos.x}px`;
+    redJello.style.top = `${pixelPos.y}px`;
+  } else {
+    console.log("No valid path found for Red Jello!");
+  }
+
+  
+  if (gameTimeElapsed >= 5) {
+    isRedJelloActive = true;
+
+    if (redJelloSpeed > minSpeed) {
+      redJelloSpeed -= speedIncreaseRate; 
+    }
+  }
+
+  if (gameTimeElapsed >= chaseThreshold) {
+    if (redJelloSpeed > maxSpeed) {
+      redJelloSpeed = maxSpeed;
+    }
+  }
+
+  gameTimeElapsed++;
+
+  setTimeout(updateRedJello, redJelloSpeed);
+}
+setTimeout(updateRedJello, redJelloSpeed);
