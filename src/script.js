@@ -336,3 +336,30 @@ function updateRedJello() {
   setTimeout(updateRedJello, redJelloSpeed);
 }
 setTimeout(updateRedJello, redJelloSpeed);
+
+let lives = 3;
+const livesDisplay = document.getElementById("lives");
+
+function updateLivesDisplay() {
+  livesDisplay.textContent = `Lives: ${lives}`;
+}
+
+function checkCollision() {
+  const cakePos = getGridPosition(x, y);
+  const greenPos = getGridPosition(parseInt(greenJello.style.left), parseInt(greenJello.style.top));
+  const redPos = getGridPosition(parseInt(redJello.style.left), parseInt(redJello.style.top));
+
+  if ((cakePos.col === greenPos.col && cakePos.row === greenPos.row) || (cakePos.col === redPos.col && cakePos.row === redPos.row)) {
+    lives--;
+    updateLivesDisplay();
+    console.log(`Lives left: ${lives}`);
+    
+    if (lives === 0) {
+      alert("Game Over! You've run out of lives!");
+      stopTimer();
+    }
+  }
+}
+
+updateLivesDisplay();
+setInterval(checkCollision, 100);
