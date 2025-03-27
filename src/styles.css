@@ -1,6 +1,6 @@
 
 body {
-  background: linear-gradient(135deg, #ffccff, #a06cd5, #5a189a);
+  background: linear-gradient(135deg, #FAD2E1, #A7C7E7, #D16BA5);
   font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ body {
   
   .title-text {
     font-size: 80px;
-    color: #53097a;
+    color: #6a5148;
     text-align: center;
     margin-top: 20px;
     text-shadow: 4px 4px 8px rgba(255, 102, 178, 0.5);
@@ -42,17 +42,17 @@ body {
     grid-template-columns: repeat(30, 40px);
     grid-template-rows: repeat(16, 40px);
     gap: 0;
-    background-color: #433878;
+    background-color: #B07C59;
   }
   
   .wall {
-    background-color: #E4B1F0;
+    background-color: #FFF7EB;
     width: 40px;
     height: 40px;
   }
   
   .path {
-    background-color: #433878;
+    background-color: #B07C59;
     width: 40px;
     height: 40px;
   }
@@ -63,13 +63,13 @@ body {
   }
   
   .collectible {
-    background-color: #FFE1FF;
+    background-color: #542344;
     width: 10px;
     height: 10px;
   }
   
  .power-pellet {
-    background-color: #d28eff;
+    background-color: #C0DFA1;
     width: 20px;
     height: 20px;
   }
@@ -110,7 +110,7 @@ body {
     font-size: 28px;
     color: #ffffff;
     text-align: center;
-    background: linear-gradient(135deg, #29358a, #6d298a);
+    background: linear-gradient(135deg, #843B62, #6B4F4F);
     border-radius: 15px;
     padding: 15px 30px;
     display: inline-block;
@@ -121,6 +121,7 @@ body {
 
   .timer-box span {
     font-weight: bold;
+    font-family:'Courier New', Courier, monospace;
     letter-spacing: 2px;
 }
   
@@ -133,10 +134,11 @@ body {
     font-size: 18px;
     padding: 12px 25px;
     margin: 10px;
-    background: linear-gradient(135deg, #6d298a, #8a2973);
+    background: linear-gradient(135deg, #D4A276, #8D6A5E);
     color: #ffffff;
     border-radius: 10px;
-    font-family: 'Press Start 2P', sans-serif;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
@@ -153,19 +155,25 @@ body {
     font-size: 28px;
     color: #ffffff;
     text-align: center;
-    background: linear-gradient(135deg, #29358a, #6d298a);
+    background: linear-gradient(135deg, #843B62, #6B4F4F);
     border-radius: 15px;
     padding: 15px 30px;
     display: inline-block;
-    font-family: 'Press Start 2P', sans-serif;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    transform: translateY(-539%);
+    position: relative;
+    right: 210px; /* Moves buttons outside the right side of the game container */
+
   }
 
   #how-to-play-btn {
     padding: 15px 30px;
     font-size: 28px;
     background-color: #ffcc00;
+    background: linear-gradient(135deg, #843B62, #6B4F4F);
     border: none;
     border-radius: 15px;
     cursor: pointer;
@@ -211,6 +219,20 @@ body {
     font-size: 40px;
     margin: 10px;
     color: rgb(63, 12, 107);
+    transform: translateY(-865%);
+    position: relative;
+    right: -250px; /* Moves buttons outside the right side of the game container */
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+
   }
     
+  .button-container {
+    display: flex;
+    flex-direction: column; /* Aligns buttons in a vertical column */
+    position: relative;
+    right: -680px; /* Moves buttons outside the right side of the game container */
+    top: 50%;
+    transform: translateY(-200%);
+}
 
