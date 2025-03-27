@@ -141,21 +141,26 @@ let timeLeft = 60;
 let timerInterval; 
 let isGameRunning = false; 
 let isPaused = false; 
+let redJelloTimeout;
+let greenJelloInterval;
 
 document.addEventListener("keydown", startGameOnMove);
 
-document.getElementById("stop-button").addEventListener("click", () => {
+/*document.getElementById("stop-button").addEventListener("click", () => {
   if (isGameRunning) {
     isGameRunning = false; 
     stopTimer(); 
+    stopJellos();
     console.log("Game stopped!"); 
   }
 });
+*/
 
 document.getElementById("pause-button").addEventListener("click", () => {
   if (isGameRunning && !isPaused) {
     isPaused = true;
     clearInterval(timerInterval);
+    stopJellos();
     console.log("Game paused!");
   }
 });
@@ -164,6 +169,7 @@ document.getElementById("unpause-button").addEventListener("click", () => {
   if (isGameRunning && isPaused) {
     isPaused = false;
     startTimer();
+    resumeJellos();
     console.log("Game resumed!");
   }
 });
@@ -173,6 +179,13 @@ function startGameOnMove() {
     isGameRunning = true; 
     startTimer(); 
     console.log("Game started!");
+    setInterval(updateGreenJello, 500);
+
+    function startRedJello() {
+      updateRedJello(); 
+      setTimeout(startRedJello, redJelloSpeed);
+    }
+    startRedJello();
     
     document.removeEventListener("keydown", startGameOnMove);
   }
@@ -196,6 +209,21 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(timerInterval); 
+}
+
+function stopJellos() {
+  clearInterval(greenJelloInterval);  
+  clearTimeout(redJelloInterval);   
+}
+
+function resumeJellos() {
+  greenJelloInterval = setInterval(updateGreenJello, 500);
+
+  function startRedJello() {
+    updateRedJello();
+    redJelloInterval = setTimeout(startRedJello, redJelloSpeed);
+  }
+  startRedJello();
 }
 
 
@@ -269,6 +297,7 @@ function findPathBFS(startCol, startRow, targetCol, targetRow, grid) {
 
 
 function updateGreenJello() {
+  if (!isPaused){
     const cakePos = getGridPosition(x, y); 
     const jelloPos = greenJelloPosition;
 
@@ -285,9 +314,8 @@ function updateGreenJello() {
     } else {
         console.log("No valid path found for Green Jello!");
     }
+  }
 }
-
-setInterval(updateGreenJello, 500);
 
 let redJelloSpeed = 1000; 
 const minSpeed = 200; 
@@ -298,6 +326,7 @@ let gameTimeElapsed = 0;
 let isRedJelloActive = false; 
 
 function updateRedJello() {
+  if (!isPaused) {
   const cakePos = getGridPosition(x, y);
   const jelloRedPos = redJelloPosition;
 
@@ -330,12 +359,14 @@ function updateRedJello() {
       redJelloSpeed = maxSpeed;
     }
   }
-
+  }
   gameTimeElapsed++;
 
-  setTimeout(updateRedJello, redJelloSpeed);
 }
-setTimeout(updateRedJello, redJelloSpeed);
+
+
+
+
 
 let lives = 3;
 const livesDisplay = document.getElementById("lives");
