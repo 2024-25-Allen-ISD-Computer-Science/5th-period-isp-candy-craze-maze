@@ -117,6 +117,7 @@ body {
     font-family: 'Press Start 2P', sans-serif;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    right: 0px;
   }
 
   .timer-box span {
@@ -145,8 +146,8 @@ body {
   }
   
   button:hover {
-    background: linear-gradient(135deg, #c40000, #ff3131);
-    box-shadow: 0px 6px 15px rgba(255, 0, 0, 0.8);
+    background: linear-gradient(135deg, #542344, #702963);
+    box-shadow: 0px 6px 15px #4E2A3E;
     transform: scale(1.1);
   }
   
@@ -165,7 +166,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     transform: translateY(-539%);
     position: relative;
-    right: 210px; /* Moves buttons outside the right side of the game container */
+    right: 410px; 
 
   }
 
@@ -221,7 +222,7 @@ body {
     color: rgb(63, 12, 107);
     transform: translateY(-865%);
     position: relative;
-    right: -250px; /* Moves buttons outside the right side of the game container */
+    right: -410px;
     font-family:'Courier New', Courier, monospace;
     font-weight: bold;
 
@@ -229,9 +230,9 @@ body {
     
   .button-container {
     display: flex;
-    flex-direction: column; /* Aligns buttons in a vertical column */
+    flex-direction: column; 
     position: relative;
-    right: -680px; /* Moves buttons outside the right side of the game container */
+    right: -680px; 
     top: 50%;
     transform: translateY(-200%);
 }
