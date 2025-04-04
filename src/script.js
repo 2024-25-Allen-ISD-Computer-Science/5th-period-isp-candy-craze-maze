@@ -179,14 +179,13 @@ function startGameOnMove() {
     isGameRunning = true; 
     startTimer(); 
     console.log("Game started!");
-    setInterval(updateGreenJello, 500);
+    greenJelloInterval = setInterval(updateGreenJello, 500);
 
     function startRedJello() {
       updateRedJello(); 
-      setTimeout(startRedJello, redJelloSpeed);
+      redJelloInterval = setTimeout(startRedJello, redJelloSpeed);
     }
     startRedJello();
-    
     document.removeEventListener("keydown", startGameOnMove);
   }
 }
@@ -318,7 +317,7 @@ function updateGreenJello() {
 }
 
 let redJelloSpeed = 1000; 
-const minSpeed = 200; 
+const minSpeed = 300; 
 const maxSpeed = 300;
 const speedIncreaseRate = 5;
 const chaseThreshold = 30;
@@ -332,8 +331,8 @@ function updateRedJello() {
 
   const path = findPathBFS(jelloRedPos.col, jelloRedPos.row, cakePos.col, cakePos.row, layout);
 
-  if (path.length > 2) {
-    const nextStep = path[2];
+  if (path.length > 1) {
+    const nextStep = path[1];
     
     redJelloPosition.col = nextStep.col;
     redJelloPosition.row = nextStep.row;
@@ -370,27 +369,66 @@ function updateRedJello() {
 
 let lives = 3;
 const livesDisplay = document.getElementById("lives");
+updateLivesDisplay();
 
 function updateLivesDisplay() {
   livesDisplay.textContent = `Lives: ${lives}`;
 }
 
+let isResetting = false;
+
 function checkCollision() {
+  if (isResetting) return;
+
   const cakePos = getGridPosition(x, y);
-  const greenPos = getGridPosition(parseInt(greenJello.style.left), parseInt(greenJello.style.top));
-  const redPos = getGridPosition(parseInt(redJello.style.left), parseInt(redJello.style.top));
+  const greenPos = getGridPosition(
+    parseInt(greenJello.style.left) || greenJelloPosition.col * gridSize, 
+    parseInt(greenJello.style.top) || greenJelloPosition.row * gridSize
+  );
+
+  const redPos = getGridPosition(
+    parseInt(redJello.style.left) || redJelloPosition.col * gridSize, 
+    parseInt(redJello.style.top) || redJelloPosition.row * gridSize
+  );
 
   if ((cakePos.col === greenPos.col && cakePos.row === greenPos.row) || (cakePos.col === redPos.col && cakePos.row === redPos.row)) {
+    isResetting = true;
     lives--;
     updateLivesDisplay();
-    console.log(`Lives left: ${lives}`);
-    
-    if (lives === 0) {
-      alert("Game Over! You've run out of lives!");
-      stopTimer();
-    }
-  }
-}
 
-updateLivesDisplay();
+    clearInterval(timerInterval);
+    stopJellos();
+
+    if (lives > 0) {
+      setTimeout(() => {
+        x = 0;
+        y = 600;
+        sprite.style.left = `${x}px`;
+        sprite.style.top = `${y}px`;
+        
+        greenJelloPosition = { col: 29, row: 0 };
+        redJelloPosition.col = 0;
+        redJelloPosition.row = 1;
+        
+        let greenPixel = getPixelPosition(greenJelloPosition.col, greenJelloPosition.row);
+        greenJello.style.left = `${greenPixel.x}px`;
+        greenJello.style.top = `${greenPixel.y}px`;
+        let redPixel = getPixelPosition(redJelloPosition.col, redJelloPosition.row);
+        redJello.style.left = `${redPixel.x}px`;
+        redJello.style.top = `${redPixel.y}px`;
+        
+        
+        startTimer();
+        resumeJellos();
+        isResetting = false;
+      }, 500);
+  
+    } else {
+      setTimeout(() => {
+        alert("Game Over!");
+        location.reload();  
+  }, 100);
+}
+}
+}
 setInterval(checkCollision, 100);
